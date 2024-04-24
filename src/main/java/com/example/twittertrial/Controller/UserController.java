@@ -4,9 +4,7 @@ import com.example.twittertrial.DTO.UserLoginRequest;
 import com.example.twittertrial.DTO.UserSignupRequest;
 import com.example.twittertrial.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
@@ -22,5 +20,14 @@ public class UserController {
     @PostMapping("/signup")
     public String signup(@RequestBody UserSignupRequest request) {
         return userService.signup(request.getEmail(), request.getName(), request.getPassword());
+    }
+    @GetMapping("/users")
+    public String getUsers() {
+        return userService.getUsers();
+    }
+
+    @GetMapping("/users/{id}")
+    public String getUserById(@PathVariable Long id) {
+        return UserService.getUserById(id);
     }
 }

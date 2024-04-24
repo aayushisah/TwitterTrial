@@ -42,4 +42,8 @@ public class UserService {
             return "Error: " + e.getMessage(); // Handle other exceptions
         }
     }
+
+    public User getUserById(Long userId) {
+        return userRepository.findById(userId).orElse(null);
+    }
 }
