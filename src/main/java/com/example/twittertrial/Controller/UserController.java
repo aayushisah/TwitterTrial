@@ -21,13 +21,13 @@ public class UserController {
     public String signup(@RequestBody UserSignupRequest request) {
         return userService.signup(request.getEmail(), request.getName(), request.getPassword());
     }
-    @GetMapping("/users")
-    public String getUsers() {
-        return userService.getUsers();
-    }
-
-    @GetMapping("/users/{id}")
-    public String getUserById(@PathVariable Long id) {
-        return UserService.getUserById(id);
-    }
+//    @GetMapping("/users")
+//    public String getUsers() {
+//        return userService.getUsers();
+//    }
+//
+//    @GetMapping("/users/{id}")
+//    public String getUserById(@PathVariable Long id) {
+//        return UserService.getUserById(id);
+//    }
 }
