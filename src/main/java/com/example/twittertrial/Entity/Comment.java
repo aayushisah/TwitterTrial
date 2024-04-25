@@ -1,6 +1,9 @@
 package com.example.twittertrial.Entity;
 
+import com.example.twittertrial.DTO.UserDto;
 import jakarta.persistence.*;
+
+import java.util.Date;
 
 @Entity
 @Table(name = "comments")
@@ -22,6 +25,15 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    @Column(name = "name")
+    private String name;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
+
+    @Transient
+    private UserDto commentCreator;
+
 
     public Long getId() {
         return id;
@@ -54,7 +66,12 @@ public class Comment {
     public void setUser(User user) {
         this.user = user;
     }
-
+    /*
+    * public void setUser(Long userId) {
+        this.user = new User();
+        this.user.setId(userId);
+    }
+    */
     // Add toString() method for debugging and logging
     @Override
     public String toString() {
@@ -63,4 +80,9 @@ public class Comment {
                 ", commentBody='" + commentBody + '\'' +
                 '}';
     }
+
+    public void setCommentCreator(UserDto commentCreator) {
+        this.commentCreator = commentCreator;
+    }
+
 }
