@@ -21,6 +21,8 @@ public class Post {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Column(name = "name")
+    private String name;
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
@@ -64,6 +66,14 @@ public class Post {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
     // Constructor, Getters, and Setters
 }

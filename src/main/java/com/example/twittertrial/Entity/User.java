@@ -57,24 +57,24 @@ public class User {
         this.password = password;
     }
 
-    // toString method
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
-
-    // equals and hashcode methods
-    @Override
-
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id.equals(user.id) && email.equals(user.email) && name.equals(user.name) && password.equals(user.password);
-    }
+//    // toString method
+//    @Override
+//    public String toString() {
+//        return "User{" +
+//                "id=" + id +
+//                ", email='" + email + '\'' +
+//                ", name='" + name + '\'' +
+//                ", password='" + password + '\'' +
+//                '}';
+//    }
+//
+//    // equals and hashcode methods
+//    @Override
+//
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        User user = (User) o;
+//        return id.equals(user.id) && email.equals(user.email) && name.equals(user.name) && password.equals(user.password);
+//    }
 }

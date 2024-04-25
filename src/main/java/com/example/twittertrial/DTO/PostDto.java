@@ -11,6 +11,7 @@ public class PostDto {
     private Date date;
     private List<CommentDto> comments;
     private Long userID; // User ID instead of User object
+    private String name;
 
     public Long getPostID() {
         return postID;
@@ -52,6 +53,14 @@ public class PostDto {
         this.userID = userID;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     // Constructor, Getters, and Setters
 
     public PostDto() {
@@ -65,4 +74,7 @@ public class PostDto {
         this.userID = user.getId();
     }
 
+    public void setPostId(Long id) {
+        this.postID = id;
+    }
 }
