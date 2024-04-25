@@ -27,13 +27,14 @@ public class CommentService {
     }
 
     public String createComment(CommentDto commentDto) {
-        Optional<Post> optionalPost = postRepository.findById(commentDto.getPostId());
+        Optional<Post> optionalPost = postRepository.findById(commentDto.getPostID());
         if (optionalPost.isPresent()) {
-            Optional<User> optionalUser = userRepository.findById(commentDto.getUserId());
+            Optional<User> optionalUser = userRepository.findById(commentDto.getUserID());
             if (optionalUser.isPresent()) {
                 Comment comment = new Comment();
                 comment.setCommentBody(commentDto.getCommentBody());
-                comment.setCommentCreator(commentDto.getCommentCreator());
+                // Since there's no commentCreator field in CommentDto, you might not need to set it
+                // comment.setCommentCreator(commentDto.getCommentCreator());
                 comment.setPost(optionalPost.get());
                 comment.setUser(optionalUser.get());
                 commentRepository.save(comment);

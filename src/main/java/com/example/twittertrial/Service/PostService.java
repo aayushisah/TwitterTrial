@@ -90,6 +90,7 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final UserRepository userRepository;
+    private Long postId;
 
     @Autowired
     public PostService(PostRepository postRepository, UserRepository userRepository) {
@@ -119,7 +120,7 @@ public class PostService {
         return postRepository.findById(postId);
     }
 
-    public String editPost(Long postId, PostDto postDto) {
+    public String editPost(PostDto postDto) {
         Optional<Post> postOptional = postRepository.findById(postId);
         if (postOptional.isPresent()) {
             Post post = postOptional.get();

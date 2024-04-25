@@ -103,9 +103,9 @@ public class PostController {
     }
 
 
-    @PatchMapping("/{postId}")
-    public ResponseEntity<String> editPost(@PathVariable Long postId, @RequestBody PostDto postDto) {
-        String result = postService.editPost(postId, postDto);
+    @PatchMapping
+    public ResponseEntity<String> editPost(@RequestBody PostDto postDto) {
+        String result = postService.editPost(postDto);
         if (result.equals("Post edited successfully")) {
             return ResponseEntity.ok(result);
         } else {
@@ -113,8 +113,8 @@ public class PostController {
         }
     }
 
-    @DeleteMapping("/{postId}")
-    public ResponseEntity<String> deletePost(@PathVariable Long postId) {
+    @DeleteMapping
+    public ResponseEntity<String> deletePost(@RequestBody Long postId) {
         String result = postService.deletePost(postId);
         if (result.equals("Post deleted")) {
             return ResponseEntity.ok(result);
@@ -122,4 +122,5 @@ public class PostController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result);
         }
     }
+
 }

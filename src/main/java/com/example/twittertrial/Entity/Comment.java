@@ -19,11 +19,11 @@ public class Comment {
     // Define relationships with other entities if needed
     // For example:
     @ManyToOne
-    @JoinColumn(name = "post_id", nullable = false)
+    @JoinColumn(name = "post_id")
     private Post post;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Column(name = "name")
@@ -67,9 +67,9 @@ public class Comment {
         this.user = user;
     }
     /*
-    * public void setUser(Long userId) {
+    * public void setUser(Long userID) {
         this.user = new User();
-        this.user.setId(userId);
+        this.user.setId(userID);
     }
     */
     // Add toString() method for debugging and logging
