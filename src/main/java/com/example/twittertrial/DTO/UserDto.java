@@ -12,7 +12,7 @@ public class UserDto {
         this.name = name;
     }
 
-    public Long getUserId() {
+    public Long getUserID() {
         return userID;
     }
 //    public Long getUserID() {

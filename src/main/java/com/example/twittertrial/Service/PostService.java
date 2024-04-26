@@ -120,11 +120,12 @@ public class PostService {
         return postRepository.findById(postId);
     }
 
-    public String editPost(PostDto postDto) {
-        Optional<Post> postOptional = postRepository.findById(postId);
-        if (postOptional.isPresent()) {
-            Post post = postOptional.get();
+    public String editPost(Long postId, PostDto postDto) {
+        Optional<Post> optionalPost = postRepository.findById(postId);
+        if (optionalPost.isPresent()) {
+            Post post = optionalPost.get();
             post.setPostBody(postDto.getPostBody());
+            // Update any other fields as needed
             postRepository.save(post);
             return "Post edited successfully";
         } else {

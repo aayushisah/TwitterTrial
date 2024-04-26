@@ -26,11 +26,11 @@ public class Post {
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
-    public void setId(Long id) {
+    public void setID(Long id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public Long getID() {
         return id;
     }
 
@@ -50,14 +50,14 @@ public class Post {
         this.user = user;
     }
 
-    public void setUser(Long userId) {
+    public void setUser(Long userID) {
         this.user = new User();
-        this.user.setId(userId);
+        this.user.setID(userID);
     }
 
-    public void getUser(Long userId) {
+    public void getUser(Long userID) {
         this.user = new User();
-        this.user.setId(userId);
+        this.user.setID(userID);
     }
     
     public Date getDate() {

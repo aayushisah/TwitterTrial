@@ -65,7 +65,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/post")
+//@RequestMapping("/post")
 public class PostController {
 
     private final PostService postService;
@@ -75,7 +75,7 @@ public class PostController {
         this.postService = postService;
     }
 
-    @PostMapping
+    @PostMapping("/post")
     public ResponseEntity<String> createPost(@RequestBody PostDto postDto) {
         String result = postService.createPost(postDto);
         if (result.equals("Post created successfully")) {
@@ -85,15 +85,15 @@ public class PostController {
         }
     }
 
-    @GetMapping("/{postId}")
+    @GetMapping("/post/{postId}")
     public ResponseEntity<?> getPostDetails(@PathVariable Long postId) {
         Optional<Post> optionalPost = postService.getPostById(postId);
         if (optionalPost.isPresent()) {
             Post post = optionalPost.get();
             PostDto responseDto = new PostDto();
-            responseDto.setPostId(post.getId());
+            responseDto.setPostID(post.getID());
             responseDto.setPostBody(post.getPostBody());
-            responseDto.setUserID(post.getUser().getId());
+            responseDto.setUserID(post.getUser().getID());
             responseDto.setDate(post.getDate());
             responseDto.setName(post.getUser().getName());
             return ResponseEntity.ok(responseDto);
@@ -103,9 +103,9 @@ public class PostController {
     }
 
 
-    @PatchMapping
-    public ResponseEntity<String> editPost(@RequestBody PostDto postDto) {
-        String result = postService.editPost(postDto);
+    @PatchMapping("/post")
+    public ResponseEntity<String> editPost(@RequestParam Long postID, @RequestBody PostDto postDto) {
+        String result = postService.editPost(postID, postDto);
         if (result.equals("Post edited successfully")) {
             return ResponseEntity.ok(result);
         } else {
@@ -113,7 +113,8 @@ public class PostController {
         }
     }
 
-    @DeleteMapping
+
+    @DeleteMapping("/post")
     public ResponseEntity<String> deletePost(@RequestBody Long postId) {
         String result = postService.deletePost(postId);
         if (result.equals("Post deleted")) {
