@@ -51,8 +51,8 @@ public class CommentService {
         return commentRepository.findById(commentId);
     }
 
-    public String editComment(Long commentId, CommentDto commentDto) {
-        Optional<Comment> optionalComment = commentRepository.findById(commentId);
+    public String editComment( CommentDto commentDto) {
+        Optional<Comment> optionalComment = commentRepository.findById( commentDto.getCommentID());
         if (optionalComment.isPresent()) {
             Comment comment = optionalComment.get();
             comment.setCommentBody(commentDto.getCommentBody());
@@ -63,10 +63,10 @@ public class CommentService {
         }
     }
 
-    public String deleteComment(Long commentId) {
-        Optional<Comment> optionalComment = commentRepository.findById(commentId);
+    public String deleteComment(CommentDto commentDto) {
+        Optional<Comment> optionalComment = commentRepository.findById(commentDto.getCommentID());
         if (optionalComment.isPresent()) {
-            commentRepository.deleteById(commentId);
+            commentRepository.deleteById(commentDto.getCommentID());
             return "Comment deleted";
         } else {
             return "Comment does not exist";

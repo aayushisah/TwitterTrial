@@ -49,9 +49,9 @@ public class CommentController {
         }
     }
 
-    @PatchMapping("/{commentId}")
-    public ResponseEntity<String> editComment(@PathVariable Long commentId, @RequestBody CommentDto commentDto) {
-        String result = commentService.editComment(commentId, commentDto);
+    @PatchMapping
+    public ResponseEntity<String> editComment(@RequestBody CommentDto commentDto) {
+        String result = commentService.editComment(commentDto);
         if (result.equals("Comment edited successfully")) {
             return ResponseEntity.ok(result);
         } else {
@@ -59,9 +59,9 @@ public class CommentController {
         }
     }
 
-    @DeleteMapping("/{commentId}")
-    public ResponseEntity<String> deleteComment(@PathVariable Long commentId) {
-        String result = commentService.deleteComment(commentId);
+    @DeleteMapping
+    public ResponseEntity<String> deleteComment(@RequestBody CommentDto commentDto) {
+        String result = commentService.deleteComment(commentDto);
         if (result.equals("Comment deleted")) {
             return ResponseEntity.ok(result);
         } else {
