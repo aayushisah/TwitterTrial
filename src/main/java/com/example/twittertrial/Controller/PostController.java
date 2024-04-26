@@ -58,12 +58,13 @@ public class PostController {
     }
 
     @DeleteMapping
-    public ResponseEntity<String> deletePost(@RequestBody Long postId) {
-        String result = postService.deletePost(postId);
+    public ResponseEntity<String> deletePost(@RequestBody PostDto postDto) {
+        String result = postService.deletePost(postDto);
         if (result.equals("Post deleted")) {
             return ResponseEntity.ok(result);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result);
         }
     }
+
 }
