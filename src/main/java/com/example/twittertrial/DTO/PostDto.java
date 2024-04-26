@@ -73,8 +73,4 @@ public class PostDto {
         this.comments = comments;
         this.userID = user.getID();
     }
-
-    public void setPostId(Long id) {
-        this.postID = id;
-    }
 }

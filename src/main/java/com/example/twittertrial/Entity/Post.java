@@ -1,14 +1,11 @@
 package com.example.twittertrial.Entity;
 
 import jakarta.persistence.*;
-import org.springframework.data.annotation.Id;
-
 import java.util.Date;
 
 @Entity
 @Table(name = "posts")
 public class Post {
-    @jakarta.persistence.Id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")
@@ -23,15 +20,16 @@ public class Post {
 
     @Column(name = "name")
     private String name;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
-    public void setID(Long id) {
-        this.id = id;
-    }
-
     public Long getID() {
         return id;
+    }
+
+    public void setID(Long id) {
+        this.id = id;
     }
 
     public String getPostBody() {
@@ -50,16 +48,11 @@ public class Post {
         this.user = user;
     }
 
-    public void setUser(Long userID) {
+    public void setUser(Long userId) {
         this.user = new User();
-        this.user.setID(userID);
+        this.user.setID(userId);
     }
 
-    public void getUser(Long userID) {
-        this.user = new User();
-        this.user.setID(userID);
-    }
-    
     public Date getDate() {
         return date;
     }
@@ -68,13 +61,12 @@ public class Post {
         this.date = date;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getName() {
         return name;
     }
-    // Constructor, Getters, and Setters
-}
 
+    public void setName(String name) {
+        this.name = name;
+    }
+    // Constructor, other methods...
+}
