@@ -30,9 +30,9 @@ public class PostController {
         }
     }
 
-    @GetMapping("/{postId}")
-    public ResponseEntity<?> getPostDetails(@PathVariable(value = "postId") int postId) {
-        Optional<Post> optionalPost = postService.getPostById(postId);
+    @GetMapping
+    public ResponseEntity<?> getPostDetails(@RequestParam int postID) {
+        Optional<Post> optionalPost = postService.getPostById(postID);
         if (optionalPost.isPresent()) {
             Post post = optionalPost.get();
             PostDto responseDto = new PostDto();

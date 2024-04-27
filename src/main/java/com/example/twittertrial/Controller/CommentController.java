@@ -5,18 +5,11 @@ import com.example.twittertrial.Entity.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 //import  CommentService;
 import com.example.twittertrial.Service.CommentService;
 import com.example.twittertrial.DTO.CommentDto;
 import java.util.Optional;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/comment")
@@ -39,9 +32,9 @@ public class CommentController {
         }
     }
 
-    @GetMapping("/{commentId}")
-    public ResponseEntity<?> getCommentDetails(@PathVariable(value = "commentId") int commentId) {
-        Optional<Comment> optionalComment = commentService.getCommentById(commentId);
+    @GetMapping
+    public ResponseEntity<?> getCommentDetails(@RequestParam int commentID) {
+        Optional<Comment> optionalComment = commentService.getCommentById(commentID);
         if (optionalComment.isPresent()) {
             return ResponseEntity.ok(optionalComment.get());
         } else {

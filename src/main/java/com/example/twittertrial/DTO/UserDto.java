@@ -15,6 +15,10 @@ public class UserDto {
     public int getUserID() {
         return userID;
     }
+
+    public void setUserID(int id) {
+        this.userID = id;
+    }
 //    public int getUserID() {
 //        return userID;
 //    }

@@ -1,10 +1,13 @@
 package com.example.twittertrial.Service;
 
+import com.example.twittertrial.DTO.UserDto;
 import com.example.twittertrial.Entity.User;
 import com.example.twittertrial.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -43,7 +46,19 @@ public class UserService {
         }
     }
 
-    public User getUserById(int userID) {
+    public User getUserByID(int userID) {
         return userRepository.findById(userID).orElse(null);
+    }
+
+    public Optional<UserDto> getUserDetails(int userID) {
+        User user = userRepository.findById(userID).orElse(null);
+        if (user == null) {
+            return Optional.empty();
+        } else {
+            UserDto userDto = new UserDto();
+            userDto.setUserID(user.getID());
+            userDto.setName(user.getName());
+            return Optional.of(userDto);
+        }
     }
 }
