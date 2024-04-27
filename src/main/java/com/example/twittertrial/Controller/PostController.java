@@ -31,7 +31,7 @@ public class PostController {
     }
 
     @GetMapping("/{postId}")
-    public ResponseEntity<?> getPostDetails(@PathVariable Long postId) {
+    public ResponseEntity<?> getPostDetails(@PathVariable(value = "postId") int postId) {
         Optional<Post> optionalPost = postService.getPostById(postId);
         if (optionalPost.isPresent()) {
             Post post = optionalPost.get();
@@ -41,6 +41,7 @@ public class PostController {
             responseDto.setUserID(post.getUser().getID());
             responseDto.setDate(post.getDate());
             responseDto.setName(post.getUser().getName());
+            //responseDto.setComments(post.getComments());
             return ResponseEntity.ok(responseDto);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Post does not exist");

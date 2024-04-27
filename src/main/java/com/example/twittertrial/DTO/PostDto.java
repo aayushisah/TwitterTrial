@@ -6,18 +6,18 @@ import java.util.Date;
 import java.util.List;
 
 public class PostDto {
-    private Long postID;
+    private int postID;
     private String postBody;
     private Date date;
     private List<CommentDto> comments;
-    private Long userID; // User ID instead of User object
+    private int userID; // User ID instead of User object
     private String name;
 
-    public Long getPostID() {
+    public int getPostID() {
         return postID;
     }
 
-    public void setPostID(Long postID) {
+    public void setPostID(int postID) {
         this.postID = postID;
     }
 
@@ -45,11 +45,11 @@ public class PostDto {
         this.comments = comments;
     }
 
-    public Long getUserID() {
+    public int getUserID() {
         return userID;
     }
 
-    public void setUserID(Long userID) {
+    public void setUserID(int userID) {
         this.userID = userID;
     }
 
@@ -66,7 +66,7 @@ public class PostDto {
     public PostDto() {
     }
 
-    public PostDto(Long postID, String postBody, Date date, List<CommentDto> comments, User user) {
+    public PostDto(int postID, String postBody, Date date, List<CommentDto> comments, User user) {
         this.postID = postID;
         this.postBody = postBody;
         this.date = date;

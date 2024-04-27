@@ -1,6 +1,6 @@
 package com.example.twittertrial.DTO;
 public class UserDto {
-    private Long userID;
+    private int userID;
     private String name;
 
 
@@ -12,14 +12,14 @@ public class UserDto {
         this.name = name;
     }
 
-    public Long getUserID() {
+    public int getUserID() {
         return userID;
     }
-//    public Long getUserID() {
+//    public int getUserID() {
 //        return userID;
 //    }
 //
-//    public void setUserID(Long userID) {
+//    public void setUserID(int userID) {
 //        this.userID = userID;
 //    }
 

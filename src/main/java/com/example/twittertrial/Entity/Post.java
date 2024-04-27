@@ -1,7 +1,9 @@
 package com.example.twittertrial.Entity;
 
+import com.example.twittertrial.DTO.CommentDto;
 import jakarta.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "posts")
@@ -9,7 +11,7 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")
-    private Long id;
+    private int id;
 
     @Column(name = "post_body")
     private String postBody;
@@ -24,11 +26,11 @@ public class Post {
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
-    public Long getID() {
+    public int getID() {
         return id;
     }
 
-    public void setID(Long id) {
+    public void setID(int id) {
         this.id = id;
     }
 
@@ -48,7 +50,7 @@ public class Post {
         this.user = user;
     }
 
-    public void setUser(Long userId) {
+    public void setUser(int userId) {
         this.user = new User();
         this.user.setID(userId);
     }
@@ -68,5 +70,9 @@ public class Post {
     public void setName(String name) {
         this.name = name;
     }
+
+    // get comments for post
+
+
     // Constructor, other methods...
 }

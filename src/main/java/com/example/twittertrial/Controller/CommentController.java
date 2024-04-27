@@ -40,7 +40,7 @@ public class CommentController {
     }
 
     @GetMapping("/{commentId}")
-    public ResponseEntity<?> getCommentDetails(@PathVariable Long commentId) {
+    public ResponseEntity<?> getCommentDetails(@PathVariable(value = "commentId") int commentId) {
         Optional<Comment> optionalComment = commentService.getCommentById(commentId);
         if (optionalComment.isPresent()) {
             return ResponseEntity.ok(optionalComment.get());

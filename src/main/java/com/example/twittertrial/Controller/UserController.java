@@ -27,7 +27,7 @@ public class UserController {
 //    }
 //
 //    @GetMapping("/users/{id}")
-//    public String getUserById(@PathVariable Long id) {
+//    public String getUserById(@PathVariable int id) {
 //        return UserService.getUserById(id);
 //    }
 }

@@ -38,7 +38,7 @@ public class PostService {
         }
     }
 
-    public Optional<Post> getPostById(Long postId) {
+    public Optional<Post> getPostById(int postId) {
         return postRepository.findById(postId);
     }
 
@@ -55,7 +55,7 @@ public class PostService {
     }
 
     public String deletePost(PostDto postDto) {
-        Long postId = postDto.getPostID();
+        int postId = postDto.getPostID();
         Optional<Post> postOptional = postRepository.findById(postId);
         if (postOptional.isPresent()) {
             postRepository.deleteById(postId);
