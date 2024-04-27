@@ -2,6 +2,8 @@ package com.example.twittertrial.Entity;
 
 import com.example.twittertrial.DTO.CommentDto;
 import jakarta.persistence.*;
+
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -16,7 +18,7 @@ public class Post {
     @Column(name = "post_body")
     private String postBody;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -71,8 +73,18 @@ public class Post {
         this.name = name;
     }
 
-    // get comments for post
 
+    // get comments for post
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)//what should it be mapped by?
+    private List<Comment> comments;
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
     // Constructor, other methods...
 }

@@ -73,4 +73,15 @@ public class PostDto {
         this.comments = comments;
         this.userID = user.getID();
     }
+
+    public PostDto(int postID, String postBody, Date date, List<CommentDto> comments) {
+        this.postID = postID;
+        this.postBody = postBody;
+        this.date = date;
+        this.comments = comments;
+    }
+
+    public int getID() {
+        return postID;
+    }
 }

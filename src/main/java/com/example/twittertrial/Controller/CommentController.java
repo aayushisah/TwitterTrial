@@ -34,7 +34,7 @@ public class CommentController {
 
     @GetMapping
     public ResponseEntity<?> getCommentDetails(@RequestParam int commentID) {
-        Optional<Comment> optionalComment = commentService.getCommentById(commentID);
+            Optional<Comment> optionalComment = commentService.getCommentById(commentID);
         if (optionalComment.isPresent()) {
             return ResponseEntity.ok(optionalComment.get());
         } else {

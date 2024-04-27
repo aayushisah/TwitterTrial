@@ -3,6 +3,7 @@ package com.example.twittertrial.Entity;
 import com.example.twittertrial.DTO.UserDto;
 import jakarta.persistence.*;
 
+import javax.net.ssl.SSLSession;
 import java.util.Date;
 
 @Entity
@@ -35,11 +36,11 @@ public class Comment {
     private UserDto commentCreator;
 
 
-    public int getId() {
+    public int getID() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setID(int id) {
         this.id = id;
     }
 
@@ -73,16 +74,19 @@ public class Comment {
     }
     */
     // Add toString() method for debugging and logging
-    @Override
-    public String toString() {
-        return "Comment{" +
-                "id=" + id +
-                ", commentBody='" + commentBody + '\'' +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Comment{" +
+//                "id=" + id +
+//                ", commentBody='" + commentBody + '\'' +
+//                '}';
+//    }
 
     public void setCommentCreator(UserDto commentCreator) {
         this.commentCreator = commentCreator;
     }
 
+    public UserDto getCommentCreator() {
+        return commentCreator;
+    }
 }

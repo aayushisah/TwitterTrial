@@ -1,5 +1,6 @@
 package com.example.twittertrial.Service;
 
+import com.example.twittertrial.DTO.PostDto;
 import com.example.twittertrial.DTO.UserDto;
 import com.example.twittertrial.Entity.User;
 import com.example.twittertrial.Repository.UserRepository;
@@ -7,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -51,14 +54,22 @@ public class UserService {
     }
 
     public Optional<UserDto> getUserDetails(int userID) {
-        User user = userRepository.findById(userID).orElse(null);
-        if (user == null) {
-            return Optional.empty();
-        } else {
-            UserDto userDto = new UserDto();
+        Optional<User> optionalUser = userRepository.findById(userID);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            List<PostDto> postDtos = user.getPosts().stream()
+                    .map(post -> new PostDto(post.getID(), post.getPostBody(), post.getDate(), post.getComments()))
+                    .collect(Collectors.toList());
+
+            UserDto userDto = new UserDto(userID, user.getName() );
             userDto.setUserID(user.getID());
             userDto.setName(user.getName());
+            userDto.setEmail(user.getEmail());
+            userDto.setPosts(postDtos);
+
             return Optional.of(userDto);
+        } else {
+            return Optional.empty();
         }
     }
 }
