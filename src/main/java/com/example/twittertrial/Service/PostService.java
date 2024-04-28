@@ -60,8 +60,18 @@ public class PostService {
         }
     }
 
-    public String deletePost(PostDto postDto) {
-        int postId = postDto.getPostID();
+//    public String deletePost(PostDto postDto) {
+//        int postId = postDto.getPostID();
+//        Optional<Post> postOptional = postRepository.findById(postId);
+//        if (postOptional.isPresent()) {
+//            postRepository.deleteById(postId);
+//            return "Post deleted";
+//        } else {
+//            return "Post does not exist";
+//        }
+//    }
+
+    public String deletePost(int postId) {
         Optional<Post> postOptional = postRepository.findById(postId);
         if (postOptional.isPresent()) {
             postRepository.deleteById(postId);

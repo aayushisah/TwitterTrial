@@ -77,10 +77,20 @@ public class CommentService {
         }
     }
 
-    public String deleteComment(CommentDto commentDto) {
-        Optional<Comment> optionalComment = commentRepository.findById(commentDto.getCommentID());
+//    public String deleteComment(CommentDto commentDto) {
+//        Optional<Comment> optionalComment = commentRepository.findById(commentDto.getCommentID());
+//        if (optionalComment.isPresent()) {
+//            commentRepository.deleteById(commentDto.getCommentID());
+//            return "Comment deleted";
+//        } else {
+//            return "Comment does not exist";
+//        }
+//    }
+
+    public String deleteComment(int commentID) {
+        Optional<Comment> optionalComment = commentRepository.findById(commentID);
         if (optionalComment.isPresent()) {
-            commentRepository.deleteById(commentDto.getCommentID());
+            commentRepository.deleteById(commentID);
             return "Comment deleted";
         } else {
             return "Comment does not exist";

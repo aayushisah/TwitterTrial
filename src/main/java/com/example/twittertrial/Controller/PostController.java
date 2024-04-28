@@ -59,13 +59,24 @@ public class PostController {
         }
     }
 
-    @DeleteMapping("/post")
-    public ResponseEntity<String> deletePost(@RequestBody PostDto postDto) {
-        String result = postService.deletePost(postDto);
-        if (result.equals("Post deleted")) {
-            return ResponseEntity.ok(result);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result);
+//    @DeleteMapping("/post")
+//    public ResponseEntity<String> deletePost(@RequestBody PostDto postDto) {
+//        String result = postService.deletePost(postDto);
+//        if (result.equals("Post deleted")) {
+//            return ResponseEntity.ok(result);
+//        } else {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result);
+//        }
+//    }
+
+        @DeleteMapping("/post")
+        public ResponseEntity<String> deletePost(@RequestParam int postID) {
+            String result = postService.deletePost(postID);
+            if (result.equals("Post deleted")) {
+                return ResponseEntity.ok(result);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result);
+            }
         }
-    }
+
 }

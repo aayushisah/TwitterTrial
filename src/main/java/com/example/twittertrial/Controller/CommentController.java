@@ -52,13 +52,24 @@ public class CommentController {
         }
     }
 
+//    @DeleteMapping
+//    public ResponseEntity<String> deleteComment(@RequestBody CommentDto commentDto) {
+//        String result = commentService.deleteComment(commentDto);
+//        if (result.equals("Comment deleted")) {
+//            return ResponseEntity.ok(result);
+//        } else {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result);
+//        }
+//    }
+
     @DeleteMapping
-    public ResponseEntity<String> deleteComment(@RequestBody CommentDto commentDto) {
-        String result = commentService.deleteComment(commentDto);
+    public ResponseEntity<String> deleteComment(@RequestParam int commentID) {
+        String result = commentService.deleteComment(commentID);
         if (result.equals("Comment deleted")) {
             return ResponseEntity.ok(result);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result);
         }
     }
+
 }
