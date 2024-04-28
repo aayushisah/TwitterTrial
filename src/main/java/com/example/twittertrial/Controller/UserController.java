@@ -44,8 +44,8 @@ public class UserController {
             return ResponseEntity.ok("Login Successful");
         } else {
             // Return error message
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-//                    .body(new Error("Username/Password Incorrect or User does not exist"));
+            //   return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+            //      .body(new Error("Username/Password Incorrect or User does not exist"));
             if(userRepository.findByEmail(email) == null) {
                 ErrorClass error = new ErrorClass("User does not exist");
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);

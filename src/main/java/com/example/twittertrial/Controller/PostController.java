@@ -1,6 +1,7 @@
 package com.example.twittertrial.Controller;
 import com.example.twittertrial.DTO.PostDto;
 import com.example.twittertrial.Entity.Post;
+import com.example.twittertrial.ErrorClass;
 import com.example.twittertrial.Service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,12 +23,13 @@ public class PostController {
     }
 
     @PostMapping("/post")
-    public ResponseEntity<String> createPost(@RequestBody PostDto postDto) {
+    public ResponseEntity<?> createPost(@RequestBody PostDto postDto) {
         String result = postService.createPost(postDto);
         if (result.equals("Post created successfully")) {
             return ResponseEntity.status(HttpStatus.CREATED).body(result);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result);
+            ErrorClass error = new ErrorClass("User does not exist");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
         }
     }
 
@@ -45,21 +47,23 @@ public class PostController {
             responseDto.setComments(post.getComments());
             return ResponseEntity.ok(responseDto);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Post does not exist");
+            ErrorClass error = new ErrorClass("Post does not exist");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
         }
     }
 
     @PatchMapping("/post")
-    public ResponseEntity<String> editPost(@RequestBody PostDto postDto) {
+    public ResponseEntity<?> editPost(@RequestBody PostDto postDto) {
         String result = postService.editPost(postDto);
         if (result.equals("Post edited successfully")) {
             return ResponseEntity.ok(result);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result);
+            ErrorClass error = new ErrorClass("Post does not exist");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
         }
     }
 
-//    @DeleteMapping("/post")
+//    @DeleteMapping("/post") // the old request body method ;-; sad to see you go
 //    public ResponseEntity<String> deletePost(@RequestBody PostDto postDto) {
 //        String result = postService.deletePost(postDto);
 //        if (result.equals("Post deleted")) {
@@ -70,12 +74,13 @@ public class PostController {
 //    }
 
         @DeleteMapping("/post")
-        public ResponseEntity<String> deletePost(@RequestParam int postID) {
+        public ResponseEntity<?> deletePost(@RequestParam int postID) {
             String result = postService.deletePost(postID);
             if (result.equals("Post deleted")) {
                 return ResponseEntity.ok(result);
             } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result);
+                ErrorClass error = new ErrorClass("Post does not exist");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
             }
         }
 

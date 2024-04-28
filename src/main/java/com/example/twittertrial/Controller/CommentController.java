@@ -2,6 +2,7 @@ package com.example.twittertrial.Controller;
 
 import com.example.twittertrial.DTO.CommentDto;
 import com.example.twittertrial.Entity.Comment;
+import com.example.twittertrial.ErrorClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
@@ -23,32 +24,43 @@ public class CommentController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createComment(@RequestBody CommentDto commentDto) {
+    public ResponseEntity<?> createComment(@RequestBody CommentDto commentDto) {
         String result = commentService.createComment(commentDto);
         if (result.equals("Comment created successfully")) {
             return ResponseEntity.ok(result);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result);
+            if(result.equals("User does not exist") ) {
+
+                ErrorClass error = new ErrorClass("User does not exist");
+
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+            }
+            else {
+                ErrorClass error = new ErrorClass("Post does not exist");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+            }
         }
     }
 
     @GetMapping
     public ResponseEntity<?> getCommentDetails(@RequestParam int commentID) {
-            Optional<Comment> optionalComment = commentService.getCommentById(commentID);
+        Optional<Comment> optionalComment = commentService.getCommentById(commentID);
         if (optionalComment.isPresent()) {
             return ResponseEntity.ok(optionalComment.get());
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Comment does not exist");
+            ErrorClass error = new ErrorClass("Comment does not exist");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
         }
     }
 
     @PatchMapping
-    public ResponseEntity<String> editComment(@RequestBody CommentDto commentDto) {
+    public ResponseEntity<?> editComment(@RequestBody CommentDto commentDto) {
         String result = commentService.editComment(commentDto);
         if (result.equals("Comment edited successfully")) {
             return ResponseEntity.ok(result);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result);
+            ErrorClass error = new ErrorClass("Comment does not exist");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
         }
     }
 
@@ -63,12 +75,13 @@ public class CommentController {
 //    }
 
     @DeleteMapping
-    public ResponseEntity<String> deleteComment(@RequestParam int commentID) {
+    public ResponseEntity<?> deleteComment(@RequestParam int commentID) {
         String result = commentService.deleteComment(commentID);
         if (result.equals("Comment deleted")) {
             return ResponseEntity.ok(result);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result);
+                ErrorClass error = new ErrorClass("Comment does not exist");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
         }
     }
 
