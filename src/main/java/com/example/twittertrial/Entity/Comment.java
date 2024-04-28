@@ -1,6 +1,7 @@
 package com.example.twittertrial.Entity;
 
 import com.example.twittertrial.DTO.UserDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import javax.net.ssl.SSLSession;
@@ -20,10 +21,12 @@ public class Comment {
     // Define relationships with other entities if needed
     // For example:
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "post_id")
     private Post post;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -67,26 +70,16 @@ public class Comment {
     public void setUser(User user) {
         this.user = user;
     }
-    /*
-    * public void setUser(int userID) {
-        this.user = new User();
-        this.user.setId(userID);
-    }
-    */
-    // Add toString() method for debugging and logging
-//    @Override
-//    public String toString() {
-//        return "Comment{" +
-//                "id=" + id +
-//                ", commentBody='" + commentBody + '\'' +
-//                '}';
-//    }
 
-    public void setCommentCreator(UserDto commentCreator) {
-        this.commentCreator = commentCreator;
+    public int getUserID() {
+        return user.getID();
     }
 
-    public UserDto getCommentCreator() {
-        return commentCreator;
+    public String getName() {
+        return name;
+    }
+
+    public Date getDate() {
+        return date;
     }
 }

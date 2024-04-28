@@ -1,9 +1,10 @@
 package com.example.twittertrial.Entity;
 
 import com.example.twittertrial.DTO.CommentDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +13,8 @@ import java.util.List;
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+
     @Column(name = "post_id")
     private int id;
 
@@ -19,6 +22,7 @@ public class Post {
     private String postBody;
 
     @ManyToOne()
+    @JsonIgnore
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -78,8 +82,18 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)//what should it be mapped by?
     private List<Comment> comments;
 
-    public List<Comment> getComments() {
-        return comments;
+    public List<CommentDto> getComments() {
+        List<CommentDto> commentDtos = new ArrayList<>();
+        for (Comment comment : comments) {
+            CommentDto commentDto = new CommentDto();
+            commentDto.setCommentID(comment.getID());
+            commentDto.setCommentBody(comment.getCommentBody());
+            commentDto.setUserID(comment.getUser().getID());
+            commentDto.setName(comment.getName());
+            commentDto.setDate(comment.getDate());
+            commentDtos.add(commentDto);
+        }
+        return commentDtos;
     }
 
     public void setComments(List<Comment> comments) {

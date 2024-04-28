@@ -4,6 +4,7 @@ import com.example.twittertrial.DTO.CommentDto;
 import com.example.twittertrial.DTO.PostDto;
 import com.example.twittertrial.DTO.UserDto;
 import jakarta.persistence.*;
+import org.springframework.beans.BeanUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -70,8 +71,34 @@ public class User {
 
     // Constructor, getters, and setters...
     public List<PostDto> getPosts() {
-        return posts.stream()
+
+        return posts.stream().map(p ->
+        { PostDto postDTO = new PostDto();
+            BeanUtils.copyProperties(p, postDTO);
+            return postDTO;
+        }).collect(Collectors.toList());
+
+//        return posts.stream()
+//
 //                .map(post -> new PostDto(
+//                        post.getID(),
+//                        post.getPostBody(),
+//                        post.getDate(),
+//                        post.getComments().stream()
+//                                .map(comment -> new CommentDto(
+//                                        comment.getID(),
+//                                        comment.getCommentBody(),
+//                                        new UserDto(
+//                                                comment.getUserID(), // Use getID() method to get userID
+//                                                comment.getName() // Use getName() method to get name
+//                                        ).getUserID(),
+//                                        comment.getPost().getID()
+//                                ))
+//                                .collect(Collectors.toList())
+//                ))
+//
+//                .collect(Collectors.toList());
+        //                .map(post -> new PostDto(
 //                        post.getID(),
 //                        post.getPostBody(),
 //                        post.getDate(),
@@ -87,26 +114,5 @@ public class User {
 //                                ))
 //                                .collect(Collectors.toList())
 //                ))
-                .map(post -> new PostDto(
-                        post.getID(),
-                        post.getPostBody(),
-                        post.getDate(),
-                        post.getComments().stream()
-                                .map(comment -> new CommentDto(
-                                        comment.getID(),
-                                        comment.getCommentBody(),
-                                        new UserDto(
-                                                comment.getCommentCreator().getUserID(), // Use getID() method to get userID
-                                                comment.getCommentCreator().getName() // Use getName() method to get name
-                                        ).getUserID(),
-                                        comment.getPost().getID()
-                                ))
-                                .collect(Collectors.toList())
-                ))
-
-                .collect(Collectors.toList());
-
     }
-
-
 }

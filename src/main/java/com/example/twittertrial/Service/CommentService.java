@@ -28,8 +28,17 @@ public class CommentService {
 
     public String createComment(CommentDto commentDto) {
         Optional<Post> optionalPost = postRepository.findById(commentDto.getPostID());
+
+        Optional<User> optionalUser = userRepository.findById(commentDto.getUserID());
+        if (optionalUser.isEmpty()) {
+            return "User does not exist";
+        }
+        if(optionalPost.isEmpty()) {
+            return "Post does not exist";
+        }
+        //System.out.println("Debug: " + optionalPost);
         if (optionalPost.isPresent()) {
-            Optional<User> optionalUser = userRepository.findById(commentDto.getUserID());
+
             if (optionalUser.isPresent()) {
                 Comment comment = new Comment();
                 comment.setCommentBody(commentDto.getCommentBody());
@@ -39,15 +48,16 @@ public class CommentService {
                 comment.setUser(optionalUser.get());
                 commentRepository.save(comment);
                 return "Comment created successfully";
-            } else {
-                return "User does not exist";
             }
-        } else {
-            return "Post does not exist";
         }
+        return "Post does not exist";
     }
 
     public Optional<Comment> getCommentById(int commentId) {
+
+        Optional<Comment> comment = commentRepository.findById(commentId);
+        //System.out.println(comment.get().toString());
+
         return commentRepository.findById(commentId);
     }
 

@@ -41,7 +41,7 @@ public class PostController {
             responseDto.setUserID(post.getUser().getID());
             responseDto.setDate(post.getDate());
             responseDto.setName(post.getUser().getName());
-            //responseDto.setComments(post.getComments());
+            responseDto.setComments(post.getComments());
             return ResponseEntity.ok(responseDto);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Post does not exist");
