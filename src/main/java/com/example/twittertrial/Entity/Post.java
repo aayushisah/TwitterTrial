@@ -16,7 +16,7 @@ public class Post {
 
 
     @Column(name = "post_id")
-    private int id;
+    private int postID;
 
     @Column(name = "post_body")
     private String postBody;
@@ -33,11 +33,11 @@ public class Post {
     private Date date;
 
     public int getID() {
-        return id;
+        return postID;
     }
 
     public void setID(int id) {
-        this.id = id;
+        this.postID = id;
     }
 
     public String getPostBody() {
