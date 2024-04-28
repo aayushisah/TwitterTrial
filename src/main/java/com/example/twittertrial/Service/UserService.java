@@ -3,9 +3,12 @@ package com.example.twittertrial.Service;
 import com.example.twittertrial.DTO.PostDto;
 import com.example.twittertrial.DTO.UserDto;
 import com.example.twittertrial.Entity.User;
+import com.example.twittertrial.ErrorClass;
 import com.example.twittertrial.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,9 +24,12 @@ public class UserService {
     public String login(String email, String password) {
         User user = userRepository.findByEmail(email);
         if (user == null) {
-            return "User does not exist";
+
+            ErrorClass error = new ErrorClass("User does not exist");
+            return error.getMessage();
         } else if (!user.getPassword().equals(password)) {
-            return "Username/Password Incorrect";
+            ErrorClass error = new ErrorClass("Username/Password Incorrect");
+            return error.getMessage();
         } else {
             return "Login Successful";
         }
