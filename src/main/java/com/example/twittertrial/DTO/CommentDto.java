@@ -1,5 +1,8 @@
 package com.example.twittertrial.DTO;
 
+import com.example.twittertrial.Entity.User;
+import org.modelmapper.ModelMapper;
+
 import java.util.Date;
 
 public class CommentDto {
@@ -9,6 +12,7 @@ public class CommentDto {
     private int userID; // User ID instead of User object
     private String name;
     private Date date;
+
 
     public int getCommentID() {
         return commentID;

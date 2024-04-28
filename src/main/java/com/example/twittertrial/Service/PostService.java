@@ -1,6 +1,9 @@
 package com.example.twittertrial.Service;
 
+import com.example.twittertrial.DTO.CommentDto;
 import com.example.twittertrial.DTO.PostDto;
+import com.example.twittertrial.DTO.UserDto;
+import com.example.twittertrial.Entity.Comment;
 import com.example.twittertrial.Entity.Post;
 import com.example.twittertrial.Entity.User;
 import com.example.twittertrial.Repository.PostRepository;
@@ -9,7 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 @Service
 public class PostService {
 
@@ -64,5 +70,30 @@ public class PostService {
             return "Post does not exist";
         }
     }
+
+    public List<PostDto> getAllPosts() {
+        List<Post> posts = postRepository.findAllByOrderByDateDesc();
+        return posts.stream()
+                .map(post -> {
+                    return new PostDto(
+                            post.getID(),
+                            post.getPostBody(),
+                            post.getDate(),
+                            mapCommentsToCommentDtos(post.getComments())
+                    );
+                })
+                .collect(Collectors.toList());
+    }
+
+    private List<CommentDto> mapCommentsToCommentDtos(List<CommentDto> comments) {
+        return comments.stream()
+                .map(comment -> new CommentDto(
+                        comment.getCommentID(),
+                        comment.getCommentBody(),
+                        new UserDto(comment.getUserID(), comment.getName())
+                ))
+                .collect(Collectors.toList());
+    }
+
 
 }

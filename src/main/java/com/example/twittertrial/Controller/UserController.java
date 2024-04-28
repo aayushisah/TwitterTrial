@@ -1,5 +1,6 @@
 package com.example.twittertrial.Controller;
 
+import com.example.twittertrial.DTO.PostDto;
 import com.example.twittertrial.DTO.UserDto;
 import com.example.twittertrial.DTO.UserLoginRequest;
 import com.example.twittertrial.DTO.UserSignupRequest;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -36,13 +38,10 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User does not exist");
         }
     }
-//    @GetMapping("/users")
-//    public String getUsers() {
-//        return userService.getUsers();
-//    }
-//
-//    @GetMapping("/users/{id}")
-//    public String getUserById(@PathVariable int id) {
-//        return UserService.getUserById(id);
-//    }
+
+    @GetMapping("/users")
+    public ResponseEntity<List<UserDto>> getAllUsers() {
+        List<UserDto> userDtos = userService.getAllUsers();
+        return ResponseEntity.ok(userDtos);
+    }
 }

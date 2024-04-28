@@ -1,16 +1,20 @@
 package com.example.twittertrial.Service;
 
 import com.example.twittertrial.DTO.CommentDto;
+import com.example.twittertrial.DTO.UserDto;
 import com.example.twittertrial.Entity.Comment;
 import com.example.twittertrial.Entity.Post;
 import com.example.twittertrial.Entity.User;
 import com.example.twittertrial.Repository.CommentRepository;
 import com.example.twittertrial.Repository.PostRepository;
 import com.example.twittertrial.Repository.UserRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+
+import static java.util.Optional.*;
 
 @Service
 public class CommentService {
@@ -81,5 +85,21 @@ public class CommentService {
         } else {
             return "Comment does not exist";
         }
+    }
+
+    @Autowired
+    private ModelMapper modelMapper; // Use modelMapper to convert Entity to DTO
+
+    public CommentDto getCommentByID(int commentID) {
+        Comment comment = commentRepository.findById(commentID).orElse(null);
+        if (comment != null) {
+            return convertToDTO(comment);
+        } else {
+            return null;
+        }
+    }
+
+    private CommentDto convertToDTO(Comment comment) {
+        return modelMapper.map(comment, CommentDto.class);
     }
 }

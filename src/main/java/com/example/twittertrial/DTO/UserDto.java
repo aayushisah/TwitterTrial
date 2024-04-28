@@ -15,6 +15,17 @@ public class UserDto {
 
     }
 
+    public UserDto() {
+        // Constructor logic
+
+    }
+
+    public UserDto(String name, int id, String email) {
+        this.name = name;
+        this.userID = id;
+        this.email = email;
+    }
+
 
     public String getName() {
         return name;

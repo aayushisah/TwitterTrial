@@ -72,4 +72,11 @@ public class UserService {
             return Optional.empty();
         }
     }
+
+    public List<UserDto> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        return users.stream()
+                .map(user -> new UserDto(user.getName(), user.getID(), user.getEmail()))
+                .collect(Collectors.toList());
+    }
 }

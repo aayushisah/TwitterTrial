@@ -21,7 +21,7 @@ dependencies {
 	//implementation 'org.hibernate:hibernate-core:5.5.7'
 	runtimeOnly 'com.h2database:h2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
+	implementation 'org.modelmapper:modelmapper:2.4.4'
 }
 
 tasks.named('test') {
