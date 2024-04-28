@@ -4,6 +4,8 @@ import com.example.twittertrial.DTO.PostDto;
 import com.example.twittertrial.DTO.UserDto;
 import com.example.twittertrial.DTO.UserLoginRequest;
 import com.example.twittertrial.DTO.UserSignupRequest;
+import com.example.twittertrial.ErrorClass;
+import com.example.twittertrial.Service.UserNotFoundException;
 import com.example.twittertrial.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,7 +37,10 @@ public class UserController {
         if (optionalUserDto.isPresent()) {
             return ResponseEntity.ok(optionalUserDto.get());
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User does not exist");
+            // throw new UserNotFoundException("User does not exist");
+            //return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User does not exist");
+            ErrorClass error = new ErrorClass("User does not exist");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
         }
     }
 

@@ -100,5 +100,23 @@ public class Post {
         this.comments = comments;
     }
 
-    // Constructor, other methods...
+//    public List<CommentDto> getComments() {
+//        List<CommentDto> commentDtos = new ArrayList<>();
+//        for (Comment comment : comments) {
+//            CommentDto commentDto = new CommentDto();
+//            commentDto.setCommentID(comment.getID());
+//            commentDto.setCommentBody(comment.getCommentBody());
+//
+//            // Populate commentCreator object
+//            UserDto commentCreatorDto = new UserDto();
+//            commentCreatorDto.setUserID(comment.getCommentCreator().getID());
+//            commentCreatorDto.setName(comment.getCommentCreator().getName());
+//            commentDto.setCommentCreator(commentCreatorDto);
+//
+//            commentDto.setDate(comment.getDate());
+//            commentDtos.add(commentDto);
+//        }
+//        return commentDtos;
+//    }
+
 }
