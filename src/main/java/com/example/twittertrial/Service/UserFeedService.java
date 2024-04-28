@@ -17,12 +17,12 @@ public class UserFeedService {
         this.postRepository = postRepository;
     }
 
-    public List<Object> getUserFeed() {
+    public Object getUserFeed() {
         // Assuming postRepository.findAll() returns a list of posts in reverse chronological order
         List<Object> userFeedData = Collections.singletonList(postRepository.findAll());
 
         // Additional processing or filtering of user feed data can be done here
 
-        return userFeedData;
+        return userFeedData.get(0);
     }
 }
