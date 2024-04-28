@@ -26,7 +26,6 @@ public class UserDto {
         this.email = email;
     }
 
-
     public String getName() {
         return name;
     }

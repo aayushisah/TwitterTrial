@@ -68,9 +68,4 @@ public class PostController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result);
         }
     }
-    @GetMapping("/")
-    public ResponseEntity<List<PostDto>> getAllPosts() {
-        List<PostDto> postDtos = postService.getAllPosts();
-        return ResponseEntity.ok(postDtos);
-    }
 }

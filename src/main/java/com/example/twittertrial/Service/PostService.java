@@ -70,30 +70,4 @@ public class PostService {
             return "Post does not exist";
         }
     }
-
-    public List<PostDto> getAllPosts() {
-        List<Post> posts = postRepository.findAllByOrderByDateDesc();
-        return posts.stream()
-                .map(post -> {
-                    return new PostDto(
-                            post.getID(),
-                            post.getPostBody(),
-                            post.getDate(),
-                            mapCommentsToCommentDtos(post.getComments())
-                    );
-                })
-                .collect(Collectors.toList());
-    }
-
-    private List<CommentDto> mapCommentsToCommentDtos(List<CommentDto> comments) {
-        return comments.stream()
-                .map(comment -> new CommentDto(
-                        comment.getCommentID(),
-                        comment.getCommentBody(),
-                        new UserDto(comment.getUserID(), comment.getName())
-                ))
-                .collect(Collectors.toList());
-    }
-
-
 }
