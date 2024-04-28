@@ -13,6 +13,8 @@ public class CommentDto {
     private String name;
     private Date date;
 
+    private User user;
+
 
     public int getCommentID() {
         return commentID;
