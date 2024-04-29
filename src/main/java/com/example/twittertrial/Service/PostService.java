@@ -11,7 +11,7 @@ import com.example.twittertrial.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -35,7 +35,7 @@ public class PostService {
             Post post = new Post();
             post.setPostBody(postDto.getPostBody());
             post.setUser(user);
-            post.setDate(new Date());
+            post.setDate(LocalDate.now()); // Use LocalDate.now() to get the current date
             post.setName(user.getName());
             postRepository.save(post);
             return "Post created successfully";

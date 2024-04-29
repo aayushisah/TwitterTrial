@@ -1,11 +1,12 @@
 package com.example.twittertrial.Entity;
 
 import com.example.twittertrial.DTO.CommentDto;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -29,8 +30,9 @@ public class Post {
     @Column(name = "name")
     private String name;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date date;
+    //@Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDate date;
 
     public int getID() {
         return postID;
@@ -61,11 +63,11 @@ public class Post {
         this.user.setID(userId);
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

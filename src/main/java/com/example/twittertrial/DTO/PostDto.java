@@ -1,14 +1,18 @@
 package com.example.twittertrial.DTO;
 
 import com.example.twittertrial.Entity.User;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class PostDto {
     private int postID;
     private String postBody;
-    private Date date;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDate date;
+
     private List<CommentDto> comments;
     private int userID; // User ID instead of User object
     private String name;
@@ -29,11 +33,11 @@ public class PostDto {
         this.postBody = postBody;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -66,7 +70,7 @@ public class PostDto {
     public PostDto() {
     }
 
-    public PostDto(int postID, String postBody, Date date, List<CommentDto> comments, User user) {
+    public PostDto(int postID, String postBody, LocalDate date, List<CommentDto> comments, User user) {
         this.postID = postID;
         this.postBody = postBody;
         this.date = date;
@@ -74,7 +78,7 @@ public class PostDto {
         this.userID = user.getID();
     }
 
-    public PostDto(int postID, String postBody, Date date, List<CommentDto> comments) {
+    public PostDto(int postID, String postBody, LocalDate date, List<CommentDto> comments) {
         this.postID = postID;
         this.postBody = postBody;
         this.date = date;

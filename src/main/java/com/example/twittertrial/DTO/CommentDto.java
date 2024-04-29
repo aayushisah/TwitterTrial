@@ -1,9 +1,11 @@
 package com.example.twittertrial.DTO;
 
 import com.example.twittertrial.Entity.User;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.modelmapper.ModelMapper;
+import org.springframework.cglib.core.Local;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class CommentDto {
     private int commentID;
@@ -11,7 +13,9 @@ public class CommentDto {
     private int postID;
     private int userID; // User ID instead of User object
     private String name;
-    private Date date;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDate date;
 
     private User user;
 
@@ -64,11 +68,11 @@ public class CommentDto {
         return name;
     }
 
-    public Date setDate() {
+    public LocalDate setDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 }
