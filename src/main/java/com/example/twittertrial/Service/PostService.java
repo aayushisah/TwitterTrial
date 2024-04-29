@@ -80,4 +80,13 @@ public class PostService {
             return "Post does not exist";
         }
     }
+
+
+    public List<Post> getAllPosts() {
+        // Fetch all posts from the repository and sort them in reverse chronological order
+        List<Post> posts = postRepository.findAll();
+        return posts.stream()
+                .sorted((post1, post2) -> post2.getDate().compareTo(post1.getDate()))
+                .collect(Collectors.toList());
+    }
 }

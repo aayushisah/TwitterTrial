@@ -4,9 +4,11 @@ import com.example.twittertrial.DTO.PostDto;
 import com.example.twittertrial.DTO.UserDto;
 import com.example.twittertrial.DTO.UserLoginRequest;
 import com.example.twittertrial.DTO.UserSignupRequest;
+import com.example.twittertrial.Entity.Post;
 import com.example.twittertrial.Entity.User;
 import com.example.twittertrial.ErrorClass;
 import com.example.twittertrial.Repository.UserRepository;
+import com.example.twittertrial.Service.PostService;
 import com.example.twittertrial.Service.UserNotFoundException;
 import com.example.twittertrial.Service.UserService;
 import com.example.twittertrial.Repository.UserRepository;
@@ -109,4 +111,6 @@ public class UserController {
         List<UserDto> userDtos = userService.getAllUsers();
         return ResponseEntity.ok(userDtos);
     }
+
+
 }

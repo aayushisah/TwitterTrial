@@ -138,4 +138,52 @@ public ResponseEntity<?> getPostDetails(@RequestParam int postID) {
             }
         }
 
+    @GetMapping("/")
+    public ResponseEntity<?> getAllPosts() {
+
+        List<Post> posts = postService.getAllPosts();
+
+        // Create a JSON array to represent all posts
+        JSONArray postsArray = new JSONArray();
+        for (Post post : posts) {
+            // Create a new JSON object to represent the post details
+            JSONObject postObject = new JSONObject();
+            postObject.put("postID", post.getID());
+            postObject.put("postBody", post.getPostBody());
+            postObject.put("date", post.getDate());
+
+            // Create a JSON array to represent comments
+            JSONArray commentsArray = new JSONArray();
+            for (Comment comment : post.getComments()) {
+                JSONObject commentObject = new JSONObject();
+                commentObject.put("commentID", comment.getID());
+                commentObject.put("commentBody", comment.getCommentBody());
+
+                // Retrieve user details and set name
+                User user = comment.getUser();
+                if (user != null) {
+                    JSONObject commentCreator = new JSONObject();
+                    commentCreator.put("userID", user.getID());
+                    commentCreator.put("name", user.getName());
+                    commentObject.put("commentCreator", commentCreator);
+                } else {
+                    commentObject.put("commentCreator", null);
+                }
+
+                commentsArray.add(commentObject);
+            }
+            postObject.put("comments", commentsArray);
+
+            // Add the post object to the posts array
+            postsArray.add(postObject);
+        }
+
+        // Create a response object and add the posts array
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("posts", postsArray);
+
+        // Return the constructed JSON object as the response
+        return ResponseEntity.ok(responseObject);
+    }
+
 }
