@@ -53,6 +53,7 @@ public class CommentDto {
         this.commentBody = commentBody;
         this.postID = postID;
         this.userID = userID;
+        this.name = name;
     }
 
     public void setName(String name) {

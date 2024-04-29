@@ -82,8 +82,8 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)//what should it be mapped by?
     private List<Comment> comments;
 
-    public List<CommentDto> getComments() {
-        List<CommentDto> commentDtos = new ArrayList<>();
+    public List<Comment> getComments() {
+        List<Comment> commentDtos = new ArrayList<>();
         for (Comment comment : comments) {
             CommentDto commentDto = new CommentDto();
             commentDto.setCommentID(comment.getID());
@@ -91,7 +91,7 @@ public class Post {
             commentDto.setUserID(comment.getUser().getID());
             commentDto.setName(comment.getName());
             commentDto.setDate(comment.getDate());
-            commentDtos.add(commentDto);
+            commentDtos.add(comment);
         }
         return commentDtos;
     }

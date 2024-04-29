@@ -69,13 +69,13 @@ public ResponseEntity<?> getPostDetails(@RequestParam int postID) {
 
         // Create a JSON array to represent comments
         JSONArray commentsArray = new JSONArray();
-        for (CommentDto comment : post.getComments()) {
+        for (Comment comment : post.getComments()) {
             JSONObject commentObject = new JSONObject();
-            commentObject.put("commentID", comment.getCommentID());
+            commentObject.put("commentID", comment.getID());
             commentObject.put("commentBody", comment.getCommentBody());
 
             // Retrieve user details and set name
-            User user = getUserDetails(comment.getUserID());
+            User user = comment.getUser();
             if (user != null) {
                 JSONObject commentCreator = new JSONObject();
                 commentCreator.put("userID", user.getID());
