@@ -3,6 +3,7 @@ package com.example.twittertrial.Service;
 import com.example.twittertrial.Entity.Post;
 import com.example.twittertrial.Repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -28,11 +29,19 @@ public class UserFeedService {
         return userFeedData.get(0);
     }
 
-    public List<Post> getAllPosts() {
-        // Fetch all posts from the repository and sort them in reverse chronological order
-        List<Post> posts = postRepository.findAll();
-        return posts.stream()
-                .sorted((post1, post2) -> post2.getDate().compareTo(post1.getDate()))
-                .collect(Collectors.toList());
-    }
+//    public List<Post> getAllPosts() {
+//        // Fetch all posts from the repository and sort them in reverse chronological order
+//        List<Post> posts = postRepository.findAll();
+//        return posts.stream()
+//                .sorted((post1, post2) -> post1.getDate().compareTo(post2.getDate()))
+//                .collect(Collectors.toList());
+//    }
+
+
+        public List<Post> getAllPosts() {
+            // Sort posts by postID in descending order
+            Sort sort = Sort.by(Sort.Direction.DESC, "postID");
+            return postRepository.findAll(sort);
+        }
+
 }

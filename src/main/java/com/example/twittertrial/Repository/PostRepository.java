@@ -7,6 +7,12 @@ import java.util.List;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Integer> {
-    List<Post> findAllByOrderByDateDesc();
+    List<Post> findAll();
 }
+
+//import org.springframework.data.jpa.repository.JpaRepository;
+//import com.example.twittertrial.Entity.Post;
+//
+//public interface PostRepository extends JpaRepository<Post, Integer> {
+//}
 
